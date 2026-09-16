@@ -2,44 +2,44 @@
  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
  xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
- Title="میزکار هوشمند کتابخانه" Height="850" Width="1450" WindowStartupLocation="CenterScreen" Background="#071426" FlowDirection="RightToLeft">
- <Grid Margin="12">
-  <Grid.ColumnDefinitions><ColumnDefinition Width="270"/><ColumnDefinition Width="12"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
-  <Border Grid.Column="0" Background="#0D2038" CornerRadius="20" Padding="16">
-   <DockPanel>
+ Title="میزکار هوشمند کتابخانه" Height="900" Width="1500" MinHeight="720" MinWidth="1100" WindowStartupLocation="CenterScreen" Background="#071426" FlowDirection="RightToLeft">
+ <Window.Resources>
+  <Style x:Key="NavButton" TargetType="Button"><Setter Property="Foreground" Value="White"/><Setter Property="Background" Value="#173B5D"/><Setter Property="BorderThickness" Value="0"/><Setter Property="FontSize" Value="15"/><Setter Property="Height" Value="52"/><Setter Property="Margin" Value="0,5"/><Setter Property="HorizontalContentAlignment" Value="Right"/><Setter Property="Padding" Value="16,0"/><Setter Property="Cursor" Value="Hand"/><Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button"><Border Background="{TemplateBinding Background}" CornerRadius="12" Padding="{TemplateBinding Padding}"><ContentPresenter VerticalAlignment="Center" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/></Border></ControlTemplate></Setter.Value></Setter></Style>
+  <Style x:Key="BrowserButton" TargetType="Button"><Setter Property="Background" Value="#E8EEF5"/><Setter Property="Foreground" Value="#17324D"/><Setter Property="BorderThickness" Value="0"/><Setter Property="FontSize" Value="18"/><Setter Property="Width" Value="42"/><Setter Property="Height" Value="38"/><Setter Property="Margin" Value="3"/><Setter Property="Cursor" Value="Hand"/></Style>
+ </Window.Resources>
+ <Grid Margin="14">
+  <Grid.ColumnDefinitions><ColumnDefinition Width="285"/><ColumnDefinition Width="14"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+  <Border Grid.Column="0" Background="#0D2038" CornerRadius="22" Padding="18">
+   <DockPanel LastChildFill="True">
     <StackPanel DockPanel.Dock="Top">
-     <TextBlock Text="میزکار هوشمند کتابخانه" Foreground="White" FontSize="22" FontWeight="Bold" Margin="0,4,0,4"/>
-     <TextBlock Text="نسخه آزمایشی V1" Foreground="#7DD3FC" FontSize="12" Margin="0,0,0,18"/>
-     <Button Content="🏠  صفحه اصلی" Tag="https://www.iranpl.ir/" Click="Shortcut_Click" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Height="48" Margin="0,4"/>
-     <Button Content="👤  ثبت عضو جدید" Tag="https://www.iranpl.ir/" Click="Shortcut_Click" Height="48" Margin="0,4"/>
-     <Button Content="📄  وضعیت مدارک" Tag="https://www.iranpl.ir/" Click="Shortcut_Click" Height="48" Margin="0,4"/>
-     <Button Content="📤  ثبت امانت" Tag="https://www.iranpl.ir/" Click="Shortcut_Click" Height="48" Margin="0,4"/>
-     <Button Content="📥  بازگشت کتاب" Tag="https://www.iranpl.ir/" Click="Shortcut_Click" Height="48" Margin="0,4"/>
-     <Button Content="📚  ثبت کتاب جدید" Tag="https://www.iranpl.ir/" Click="Shortcut_Click" Height="48" Margin="0,4"/>
-     <Button Content="🎭  برنامه‌های فرهنگی" Tag="https://www.iranpl.ir/" Click="Shortcut_Click" Height="48" Margin="0,4"/>
+     <Border Background="#143653" CornerRadius="14" Padding="14" Margin="0,0,0,12"><StackPanel><TextBlock Text="میزکار هوشمند کتابخانه" Foreground="White" FontSize="22" FontWeight="Bold"/><TextBlock Text="پنل یکپارچه خدمات کتابخانه" Foreground="#9CC7E7" FontSize="12" Margin="0,5,0,0"/></StackPanel></Border>
+     <Button Content="⌂   صفحه اصلی" Tag="home" Click="Shortcut_Click" Style="{StaticResource NavButton}"/>
+     <Button Content="👤   ثبت عضو جدید" Tag="member" Click="Shortcut_Click" Style="{StaticResource NavButton}"/>
+     <Button Content="▣   وضعیت مدارک" Tag="documents" Click="Shortcut_Click" Style="{StaticResource NavButton}"/>
+     <Button Content="↗   ثبت امانت" Tag="loan" Click="Shortcut_Click" Style="{StaticResource NavButton}"/>
+     <Button Content="↙   بازگشت کتاب" Tag="return" Click="Shortcut_Click" Style="{StaticResource NavButton}"/>
+     <Button Content="📚   ثبت کتاب جدید" Tag="book" Click="Shortcut_Click" Style="{StaticResource NavButton}"/>
+     <Button Content="★   برنامه‌های فرهنگی" Tag="culture" Click="Shortcut_Click" Style="{StaticResource NavButton}"/>
+     <Button Content="⚙   تنظیم لینک‌های میانبر" Click="Settings_Click" Style="{StaticResource NavButton}" Background="#115E59"/>
     </StackPanel>
     <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
-     <Separator Margin="0,12"/>
-     <TextBlock x:Name="ClockText" Foreground="White" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center"/>
-     <TextBlock Text="اتصال امن • مرورگر داخلی WebView2" Foreground="#5EEAD4" FontSize="11" HorizontalAlignment="Center" Margin="0,8"/>
+     <Border Background="#102C47" CornerRadius="12" Padding="12" Margin="0,14,0,0"><StackPanel><TextBlock x:Name="PersianDateText" Foreground="#A7F3D0" FontSize="14" HorizontalAlignment="Center"/><TextBlock x:Name="ClockText" Foreground="White" FontSize="25" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,5,0,0"/></StackPanel></Border>
+     <TextBlock Text="V2 • WebView2 • Windows x64" Foreground="#6FA5C9" FontSize="10" HorizontalAlignment="Center" Margin="0,10,0,0"/>
     </StackPanel>
    </DockPanel>
   </Border>
-  <Border Grid.Column="2" Background="#F4F7FB" CornerRadius="20" ClipToBounds="True">
+  <Border Grid.Column="2" Background="#F4F7FB" CornerRadius="22" ClipToBounds="True">
    <Grid>
-    <Grid.RowDefinitions><RowDefinition Height="62"/><RowDefinition Height="*"/><RowDefinition Height="32"/></Grid.RowDefinitions>
-    <Border Background="White" BorderBrush="#DDE5EE" BorderThickness="0,0,0,1" Padding="12">
-     <Grid FlowDirection="LeftToRight">
-      <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-      <StackPanel Orientation="Horizontal">
-       <Button Content="←" Width="42" Margin="2" Click="Back_Click"/><Button Content="→" Width="42" Margin="2" Click="Forward_Click"/><Button Content="⟳" Width="42" Margin="2" Click="Refresh_Click"/><Button Content="⌂" Width="42" Margin="2" Click="Home_Click"/>
-      </StackPanel>
-      <TextBox x:Name="AddressBox" Grid.Column="1" Margin="12,3" VerticalContentAlignment="Center" FontSize="14" KeyDown="AddressBox_KeyDown"/>
-      <Button Grid.Column="2" Content="باز کردن" Padding="18,0" Margin="2" Click="Go_Click"/>
+    <Grid.RowDefinitions><RowDefinition Height="64"/><RowDefinition Height="*"/><RowDefinition Height="34"/></Grid.RowDefinitions>
+    <Border Background="White" BorderBrush="#DDE5EE" BorderThickness="0,0,0,1" Padding="10">
+     <Grid FlowDirection="LeftToRight"><Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <StackPanel Orientation="Horizontal"><Button Content="←" Style="{StaticResource BrowserButton}" Click="Back_Click"/><Button Content="→" Style="{StaticResource BrowserButton}" Click="Forward_Click"/><Button Content="⟳" Style="{StaticResource BrowserButton}" Click="Refresh_Click"/><Button Content="⌂" Style="{StaticResource BrowserButton}" Click="Home_Click"/></StackPanel>
+      <Border Grid.Column="1" Background="#F2F5F9" CornerRadius="10" Margin="10,2"><TextBox x:Name="AddressBox" Background="Transparent" BorderThickness="0" Margin="12,0" VerticalContentAlignment="Center" FontSize="13" KeyDown="AddressBox_KeyDown" FlowDirection="LeftToRight"/></Border>
+      <Button Grid.Column="2" Content="باز کردن" Background="#0F766E" Foreground="White" BorderThickness="0" Padding="20,0" Margin="2" Click="Go_Click"/>
      </Grid>
     </Border>
-    <wv2:WebView2 x:Name="Browser" Grid.Row="1" Source="https://www.iranpl.ir/" NavigationStarting="Browser_NavigationStarting" NavigationCompleted="Browser_NavigationCompleted"/>
-    <Border Grid.Row="2" Background="#EAF0F6" Padding="10,0"><TextBlock x:Name="StatusText" Text="آماده" Foreground="#334155" VerticalAlignment="Center" FontSize="11"/></Border>
+    <wv2:WebView2 x:Name="Browser" Grid.Row="1" NavigationStarting="Browser_NavigationStarting" NavigationCompleted="Browser_NavigationCompleted"/>
+    <Border Grid.Row="2" Background="#E7EEF5" Padding="12,0"><Grid><TextBlock x:Name="StatusText" Text="آماده" Foreground="#334155" VerticalAlignment="Center" FontSize="11"/><TextBlock Text="● اتصال" Foreground="#0F766E" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="11"/></Grid></Border>
    </Grid>
   </Border>
  </Grid>
