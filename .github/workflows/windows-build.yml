@@ -31,9 +31,23 @@ jobs:
       - name: Publish Windows x64
         run: dotnet publish LibraryDesk.Windows/LibraryDesk.Windows.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o publish/win-x64
 
-      - name: Upload Windows app
+      - name: Compile Setup
+        shell: pwsh
+        run: |
+          $iscc = "C:\Program Files (x86)\Inno Setup 6\ISCC.exe"
+          if (!(Test-Path $iscc)) { choco install innosetup -y --no-progress }
+          & $iscc "installer\LibraryDesk.iss"
+
+      - name: Upload portable app
         uses: actions/upload-artifact@v4
         with:
-          name: LibraryDesk-Windows-x64
+          name: LibraryDesk-V2-Portable-x64
           path: publish/win-x64/**
+          if-no-files-found: error
+
+      - name: Upload installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: LibraryDesk-V2-Setup-x64
+          path: installer-output/LibraryDesk-Setup-x64.exe
           if-no-files-found: error
