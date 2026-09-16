@@ -1,0 +1,39 @@
+name: Windows Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore
+        run: dotnet restore LibraryDesk.Windows/LibraryDesk.Windows.csproj
+
+      - name: Build
+        run: dotnet build LibraryDesk.Windows/LibraryDesk.Windows.csproj -c Release --no-restore
+
+      - name: Publish Windows x64
+        run: dotnet publish LibraryDesk.Windows/LibraryDesk.Windows.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o publish/win-x64
+
+      - name: Upload Windows app
+        uses: actions/upload-artifact@v4
+        with:
+          name: LibraryDesk-Windows-x64
+          path: publish/win-x64/**
+          if-no-files-found: error
